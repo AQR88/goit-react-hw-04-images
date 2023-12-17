@@ -1,33 +1,34 @@
-import { useState } from 'react';
+import { Component } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import css from '../Styles/styles.module.css';
 
-export const Searchbar = ({ onSubmit }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-
-  const handleChange = evt => {
-    setSearchQuery(evt.currentTarget.value);
+export class Searchbar extends Component {
+  state = {
+    searchQuery: '',
   };
-
-  const handleSubmit = evt => {
+  handleChange = evt => {
+    this.setState({ searchQuery: evt.currentTarget.value });
+  };
+  handleSubmit = evt => {
+    const { searchQuery } = this.state;
     evt.preventDefault();
     if (!searchQuery.trim()) return alert('Fill the searchbar');
-
-    onSubmit(searchQuery);
-    setSearchQuery('');
+    this.props.onSubmit(searchQuery);
+    this.setState({ searchQuery: '' });
   };
 
-  return (
-    <>
+  render() {
+    const { searchQuery } = this.state;
+    return (
       <header className={css.Searchbar}>
-        <form className={css.SearchForm} onSubmit={handleSubmit}>
+        <form className={css.SearchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={css.SearchFormButton}>
             <FiSearch size="18px" />
           </button>
 
           <input
             value={searchQuery}
-            onChange={handleChange}
+            onChange={this.handleChange}
             className={css.SearchFormInput}
             type="text"
             autoComplete="off"
@@ -36,6 +37,6 @@ export const Searchbar = ({ onSubmit }) => {
           />
         </form>
       </header>
-    </>
-  );
-};
+    );
+  }
+}

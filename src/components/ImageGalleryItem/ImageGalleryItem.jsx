@@ -1,44 +1,45 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import css from '../Styles/styles.module.css';
 import { MyModal } from '../Modal/Modal';
 
-export class ImageGalleryItem extends Component {
-  state = {
-    showModal: false,
-    tags: '',
-    largeImageURL: '',
+export const ImageGalleryItem = ({ images }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [tags, setTags] = useState('');
+  const [largeImageURL, setLargeImageURL] = useState('');
+
+  const onOpenModal = (largeImageURL, tags) => {
+    setShowModal(true);
+    setLargeImageURL(largeImageURL);
+    setTags(tags);
   };
-  onOpenModal = (largeImageURL, tags) => {
-    this.setState({ showModal: true, largeImageURL, tags });
+  const onCloseModal = () => {
+    setShowModal(false);
+    setLargeImageURL('');
+    setTags('');
   };
-  onCloseModal = () => {
-    this.setState({ showModal: false, largeImageURL: '', tags: '' });
-  };
-  render() {
-    return (
-      <>
-        {this.props.images.map(({ id, webformatURL, tags, largeImageURL }) => (
-          <>
-            <li
-              className={css.ImageGalleryItem}
-              key={id}
-              onClick={() => this.onOpenModal(largeImageURL, tags)}
-            >
-              <img
-                className={css.ImageGalleryItemImage}
-                src={webformatURL}
-                alt={tags}
-              />
-            </li>
-          </>
-        ))}
-        <MyModal
-          modalIsOpen={this.state.showModal}
-          closeModal={this.onCloseModal}
-          largeImg={this.state.largeImageURL}
-          tags={this.state.tags}
-        />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      {images.map(({ id, webformatURL, tags, largeImageURL }) => (
+        <>
+          <li
+            className={css.ImageGalleryItem}
+            key={id}
+            onClick={() => onOpenModal(largeImageURL, tags)}
+          >
+            <img
+              className={css.ImageGalleryItemImage}
+              src={webformatURL}
+              alt={tags}
+            />
+          </li>
+        </>
+      ))}
+      <MyModal
+        modalIsOpen={showModal}
+        closeModal={onCloseModal}
+        largeImg={largeImageURL}
+        tags={tags}
+      />
+    </>
+  );
+};
