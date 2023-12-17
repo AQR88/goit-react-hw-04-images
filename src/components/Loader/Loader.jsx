@@ -11,6 +11,7 @@ export const Loader = ({ children }) => {
       wrapperClass="dna-wrapper"
       ballColors={['#ff0000', '#00ff00', '#0000ff']}
       backgroundColor="#F4442E"
+      zindex="1200"
     >
       {children}
     </FidgetSpinner>
