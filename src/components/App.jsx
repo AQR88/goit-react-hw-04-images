@@ -33,7 +33,9 @@ const App = () => {
         setIsLoading(false);
       }
     };
-    getImages();
+    if (query !== '' || page !== 1) {
+      getImages();
+    }
   }, [query, page, isLoading]);
 
   const onHanldeSubmit = searchQuery => {

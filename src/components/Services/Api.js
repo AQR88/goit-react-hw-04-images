@@ -13,17 +13,3 @@ export const getImages = async (query, page) => {
   const { data } = await axios.get(`?q=${query}&page=${page}`);
   return data;
 };
-
-// // const BASE_URL =
-// //   'https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12';
-// axios.defaults.baseURL = 'https://pixabay.com/api/';
-// axios.defaults.headers.common['Authorisation'] = API_KEY;
-// axios.defaults.params = {
-//   orientation: 'landscape',
-//   per_page: 12,
-// };
-
-// export const getImages = async (query, page) => {
-//   const { data } = await axios.get(`search?query=${query}&page=${page}`);
-//   return data;
-// };
