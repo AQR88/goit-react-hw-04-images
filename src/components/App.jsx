@@ -22,6 +22,7 @@ const App = () => {
       }
       try {
         const { hits, totalHits } = await ImageService.getImages(query, page);
+        console.log('Hits:', hits);
         if (hits.length === 0) {
           setIsEmpty(true);
         }
@@ -36,7 +37,7 @@ const App = () => {
     if (query !== '' || page !== 1) {
       getImages();
     }
-  }, [query, page, isLoading]);
+  }, [query, page]);
 
   const onHanldeSubmit = searchQuery => {
     return (

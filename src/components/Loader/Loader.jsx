@@ -17,9 +17,3 @@ export const Loader = ({ children }) => {
     </FidgetSpinner>
   );
 };
-// import { Facebook } from 'react-content-loader';
-
-// export const MyFacebookLoader = () => <Facebook />;
-// import { Instagram } from 'react-content-loader';
-
-// export const MyInstagramLoader = () => <Instagram />;
